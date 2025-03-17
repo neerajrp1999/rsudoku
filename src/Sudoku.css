@@ -1,68 +1,141 @@
+ .prefilled {
+   background-color: #dcdcdc;
+   font-weight: bold;
+ }
 
-.sudoku-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f8f8f8;
-}
+ .editable {
+   background-color: white;
+ }
 
-.sudoku-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+ .sudoku-reset {
+   font-size: 18px;
+   color: white;
+   background-color: #007bff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 0.3s;
+ }
 
-.sudoku-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 90px);
-  grid-template-rows: repeat(9, 90px);
-  border: 3px solid black;
-}
+ .sudoku-reset:hover {
+   background-color: #0056b3;
+ }
 
+ .sudoku-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #f8f8f8;
+ }
 
-/* Prefilled numbers */
-.prefilled {
-  background-color: #dcdcdc;
-  font-weight: bold;
-}
+ .sudoku-title {
+   font-size: 24px;
+   font-weight: bold;
+   margin-bottom: 20px;
+ }
 
-/* Editable numbers */
-.editable {
-  background-color: white;
-}
-
-/* Reset Button Styling */
-.sudoku-reset {
-  font-size: 18px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.sudoku-reset:hover {
-  background-color: #0056b3;
-}
-
-/* Small 3x3 Grid (Map Container) */
 .map-container {
-  display: grid;
-  grid-template-columns: repeat(3, 30px);
-  grid-template-rows: repeat(3, 30px);
-  border: 2px solid rgb(145, 122, 122);
+   display: grid;
+   grid-template-columns: repeat(3, 30px);
+   grid-template-rows: repeat(3, 30px);
+   border: 2px solid rgb(145, 122, 122);
+ }
 
+ .sudoku-grid .map-container:nth-child(3n+1) {
+  border-left: 3px solid black;
 }
 
-.inner-cell{
+.sudoku-grid .map-container:nth-child(n+28):nth-child(-n+36),
+.sudoku-grid .map-container:nth-child(n+55):nth-child(-n+63) {
+  border-top: 3px solid black;
+}
+
+ .sudoku-grid {
+   display: grid;
+   grid-template-columns: repeat(9, 90px);
+   grid-template-rows: repeat(9, 90px);
+   border: 3px solid black;
+ }
+
+ 
+.selectedvalue-cell{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #dcdcdc;
+  font-size: 30px;
+  border: 2px solid rgb(145, 122, 122);
 }
 
-.inner-cell:hover{
+.selectedvalue-cell:hover {
   border: 2px solid black;
   cursor: pointer;
 }
 
+.sudoku-grid .selectedvalue-cell:nth-child(n+28):nth-child(-n+36),
+.sudoku-grid .selectedvalue-cell:nth-child(n+55):nth-child(-n+63) {
+  border-top: 3px solid black;
+}
+
+
+.sudoku-grid .selectedvalue-cell:nth-child(3n+1) {
+  border-left: 3px solid black;
+}
+
+ .inner-cell {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .inner-cell:hover {
+   border: 2px solid black;
+   cursor: pointer;
+ }
+
+ .sudoku-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #f8f8f8;
+ }
+
+ .sudoku-title {
+   font-size: 24px;
+   font-weight: bold;
+   margin-bottom: 20px;
+ }
+
+ .prefilled {
+   background-color: #dcdcdc;
+   font-weight: bold;
+ }
+
+ .editable {
+   background-color: white;
+ }
+
+ .sudoku-reset {
+   font-size: 18px;
+   color: white;
+   background-color: #007bff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 0.3s;
+ }
+
+ .sudoku-reset:hover {
+   background-color: #0056b3;
+ }
+
+ .inner-cell {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+ .inner-cell:hover {
+   border: 2px solid black;
+   cursor: pointer;
+ }
