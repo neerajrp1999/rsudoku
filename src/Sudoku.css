@@ -1,62 +1,68 @@
+
 .sudoku-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .sudoku-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .sudoku-grid {
-    display: grid;
-    grid-template-columns: repeat(9, 40px);
-    grid-template-rows: repeat(9, 40px);
-    gap: 2px;
-    border: 2px solid black;
-    background-color: white;
-  }
-  
-  .sudoku-cell {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    font-size: 18px;
-    border: 1px solid gray;
-    background-color: #f9f9f9;
-  }
-  
-  .prefilled {
-    background-color: #dcdcdc;
-    font-weight: bold;
-  }
-  
-  .editable {
-    background-color: white;
-  }
-  
-  .border-bottom {
-    border-bottom: 2px solid black;
-  }
-  
-  .border-right {
-    border-right: 2px solid black;
-  }
-  
-  .sudoku-reset {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .sudoku-reset:hover {
-    background-color: #0056b3;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+}
+
+.sudoku-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 90px);
+  grid-template-rows: repeat(9, 90px);
+  border: 3px solid black;
+}
+
+
+/* Prefilled numbers */
+.prefilled {
+  background-color: #dcdcdc;
+  font-weight: bold;
+}
+
+/* Editable numbers */
+.editable {
+  background-color: white;
+}
+
+/* Reset Button Styling */
+.sudoku-reset {
+  font-size: 18px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sudoku-reset:hover {
+  background-color: #0056b3;
+}
+
+/* Small 3x3 Grid (Map Container) */
+.map-container {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  grid-template-rows: repeat(3, 30px);
+  border: 2px solid rgb(145, 122, 122);
+
+}
+
+.inner-cell{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-cell:hover{
+  border: 2px solid black;
+  cursor: pointer;
+}
+
