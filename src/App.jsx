@@ -1,89 +1,85 @@
 import { useEffect, useState } from "react";
 import "./Sudoku.css";
 
-
 const App = () => {
+  const initialVisibleValue = Array.from({ length: 9 }, (_, index) => index);
+  const [visibleValue, setVisibleValue] = useState(-1);
   const initialSudokuGrid = Array.from({ length: 9 }, () => Array(9).fill(0));
   const initialSudokuVerificationGrid = Array.from({ length: 9 }, () => Array(9).fill(false));
+
   const [grid, setGrid] = useState(initialSudokuGrid);
-  const [verifycol, setVerifyCol] = useState(initialSudokuVerificationGrid);
-  const [verifyrow, setVerifyRow] = useState(initialSudokuVerificationGrid);
-  const [verifycell, setVerifyCell] = useState(initialSudokuVerificationGrid);
-  console.log(grid);
-  const verify = (i, j, k) => verifyrow[i][k] || verifycol[j][k] ;
+  const [verifyCol, setVerifyCol] = useState(initialSudokuVerificationGrid);
+  const [verifyRow, setVerifyRow] = useState(initialSudokuVerificationGrid);
+  const [verifyCell, setVerifyCell] = useState(initialSudokuVerificationGrid);
 
-  const handleCellClick = (i, j, value) => {
-    setGrid((prevGrid) =>
-      prevGrid.map((row, rowIndex) =>
-        rowIndex === i
-          ? row.map((cell, colIndex) => (colIndex === j ? value : cell))
-          : row
-      )
-    );
+  const verify = (i, j, k) => verifyRow[i][k] || verifyCol[j][k] || verifyCell[Math.floor(i / 3) * 3 + Math.floor(j / 3)][k];
 
-    setVerifyRow((prevGrid) =>
-      prevGrid.map((row, rowIndex) =>
-        rowIndex === i
-          ? row.map((cell, colIndex) => (colIndex === value - 1 ? true : cell))
-          : row
-      )
-    );
+  const handleCellClick = (i, j, index, selected) => {
+    const value = selected ? index + 1 : 0;
 
-    setVerifyCol((prevGrid) =>
-      prevGrid.map((row, rowIndex) =>
-        rowIndex === j
-          ? row.map((cell, colIndex) => (colIndex === value - 1 ? true : cell))
-          : row
-      )
-    );
+    setGrid(prevGrid => prevGrid.map((row, rowIndex) =>
+      rowIndex === i
+        ? row.map((cell, colIndex) => (colIndex === j ? value : cell))
+        : row
+    ));
 
+    setVerifyRow(prevGrid => prevGrid.map((row, rowIndex) =>
+      rowIndex === i
+        ? row.map((cell, colIndex) => (colIndex === index ? selected : cell))
+        : row
+    ));
+
+    setVerifyCol(prevGrid => prevGrid.map((row, rowIndex) =>
+      rowIndex === j
+        ? row.map((cell, colIndex) => (colIndex === index ? selected : cell))
+        : row
+    ));
+
+    setVerifyCell(prevGrid => prevGrid.map((row, rowIndex) =>
+      rowIndex === Math.floor(i / 3) * 3 + Math.floor(j / 3)
+        ? row.map((cell, colIndex) => (colIndex === index ? selected : cell))
+        : row
+    ));
   };
-  
-  useEffect(()=>{
-    console.log(grid);
-    console.log(verifyrow);
-    console.log(verifycol);
-  },[verifycol])
-
 
   return (
     <div className="sudoku-container">
       <h1 className="sudoku-title">Sudoku Generator</h1>
+      <div className="sudoku-visiblenum-grid">
+        {initialVisibleValue.map(i => (
+          <div className={`${`sudoku-visiblenum-inner-grid ${i === visibleValue && "selected-help"}`}`} key={i} onClick={() => {
+            setVisibleValue(i === visibleValue ? -1 : i);
+          }}>{i + 1}</div>
+        ))}
+      </div>
       <div className="sudoku-grid">
         {grid.map((row, i) =>
           row.map((cell, j) => (
-            <>
-              {
-                grid[i][j] === 0 ?
-                  <div className={`prefilled map-container`} key={`${i}-${j}`}>
-                    {Array.from({ length: 9 }, (_, index) => (
-                      <div key={index} className="inner-cell">
-                        {/* {index + 1} */}
-                        {verify(i, j, index) ? <></>:
-                        <div className="inner-cell-clickeble" onClick={() => handleCellClick(i, j, index + 1)}>{index + 1}</div>}
+            <div key={`${i}-${j}`} className={`${cell ? "selectedvalue-cell" : "prefilled map-container"} ${visibleValue !== 0 && verify(i, j, visibleValue) ? "selected-help" : ""} `}>
+              {cell ? (
+                <b onClick={() => handleCellClick(i, j, grid[i][j] - 1, false)}>{cell}</b>
+              ) : (
+                Array.from({ length: 9 }, (_, index) => (
+                  <div key={index} className="inner-cell">
+                    {!verify(i, j, index) && (
+                      <div className="inner-cell-clickable" onClick={() => handleCellClick(i, j, index, true)}>
+                        {index + 1}
                       </div>
-                    ))}
+                    )}
                   </div>
-                  :
-                  <div className="selectedvalue-cell" onClick={() => {
-                    setGrid((prevGrid) =>
-                      prevGrid.map((row, rowIndex) =>
-                        rowIndex === i
-                          ? row.map((cell, colIndex) => (colIndex === j ? 0 : cell))
-                          : row
-                      )
-                    )
-                  }
-                  }>
-                    {/* {verifyrow[i][grid[i][j]] ? <></>:grid[i][j]} */}
-                    {grid[i][j]}
-                  </div>
-              }
-            </>
+                ))
+              )}
+            </div>
           ))
         )}
       </div>
-      <button className="sudoku-reset" onClick={() => setGrid(initialSudokuGrid)}>
+      <button className="sudoku-reset" onClick={() => {
+        setGrid(initialSudokuGrid);
+        setVerifyCell(initialSudokuVerificationGrid);
+        setVerifyCol(initialSudokuVerificationGrid);
+        setVerifyRow(initialSudokuVerificationGrid);
+        setVisibleValue(-1);
+      }}>
         Reset
       </button>
     </div>
@@ -91,5 +87,4 @@ const App = () => {
 };
 
 export default App;
-
 

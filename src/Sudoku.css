@@ -34,53 +34,70 @@
    margin-bottom: 20px;
  }
 
-.map-container {
+ .map-container {
    display: grid;
-   grid-template-columns: repeat(3, 30px);
-   grid-template-rows: repeat(3, 30px);
+   grid-template-columns: repeat(3, 20px);
+   grid-template-rows: repeat(3, 20px);
    border: 2px solid rgb(145, 122, 122);
  }
 
  .sudoku-grid .map-container:nth-child(3n+1) {
-  border-left: 3px solid black;
-}
+   border-left: 3px solid black;
+ }
 
-.sudoku-grid .map-container:nth-child(n+28):nth-child(-n+36),
-.sudoku-grid .map-container:nth-child(n+55):nth-child(-n+63) {
-  border-top: 3px solid black;
-}
+ .sudoku-grid .map-container:nth-child(n+28):nth-child(-n+36),
+ .sudoku-grid .map-container:nth-child(n+55):nth-child(-n+63) {
+   border-top: 3px solid black;
+ }
 
  .sudoku-grid {
    display: grid;
-   grid-template-columns: repeat(9, 90px);
-   grid-template-rows: repeat(9, 90px);
+   grid-template-columns: repeat(9, 60px);
+   grid-template-rows: repeat(9, 60px);
    border: 3px solid black;
  }
 
- 
-.selectedvalue-cell{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #dcdcdc;
-  font-size: 30px;
-  border: 2px solid rgb(145, 122, 122);
-}
+ .sudoku-visiblenum-grid {
+   display: grid;
+   grid-template-columns: repeat(9, 60px);
+   grid-template-rows: repeat(1, 30px);
+   margin-bottom: 5px;
+ }
 
-.selectedvalue-cell:hover {
-  border: 2px solid black;
-  cursor: pointer;
-}
+ .sudoku-visiblenum-inner-grid {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
 
-.sudoku-grid .selectedvalue-cell:nth-child(n+28):nth-child(-n+36),
-.sudoku-grid .selectedvalue-cell:nth-child(n+55):nth-child(-n+63) {
-  border-top: 3px solid black;
-}
+ .sudoku-visiblenum-inner-grid:hover {
+   cursor: pointer;
+   font-weight: bold;
+ }
+
+ .selectedvalue-cell {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #dcdcdc;
+   font-size: 35px;
+   border: 2px solid rgb(145, 122, 122);
+ }
+
+ .selectedvalue-cell:hover {
+   border: 2px solid black;
+   cursor: pointer;
+ }
+
+ .sudoku-grid .selectedvalue-cell:nth-child(n+28):nth-child(-n+36),
+ .sudoku-grid .selectedvalue-cell:nth-child(n+55):nth-child(-n+63) {
+   border-top: 3px solid black;
+ }
 
 
-.sudoku-grid .selectedvalue-cell:nth-child(3n+1) {
-  border-left: 3px solid black;
-}
+ .sudoku-grid .selectedvalue-cell:nth-child(3n+1) {
+   border-left: 3px solid black;
+ }
 
  .inner-cell {
    display: flex;
@@ -111,6 +128,11 @@
    font-weight: bold;
  }
 
+ .selected-help {
+  background-color: #fda99a;
+  font-weight: bold;
+}
+
  .editable {
    background-color: white;
  }
@@ -123,6 +145,8 @@
    border-radius: 5px;
    cursor: pointer;
    transition: 0.3s;
+   padding: 10px 25px;
+   margin-top: 10px;
  }
 
  .sudoku-reset:hover {
@@ -140,10 +164,10 @@
    cursor: pointer;
  }
 
- .inner-cell-clickeble{
-  height: 100%;
-  width: 100%;
-  display: flex;
+ .inner-cell-clickeble {
+   height: 100%;
+   width: 100%;
+   display: flex;
    justify-content: center;
    align-items: center;
  }
